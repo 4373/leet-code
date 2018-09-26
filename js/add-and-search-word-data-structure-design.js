@@ -3,7 +3,6 @@
  */
 var WordDictionary = function() {
   this.words = {}
-  this.cache = {}
 }
 
 /**
@@ -30,10 +29,6 @@ WordDictionary.prototype.addWord = function(word) {
  * @return {boolean}
  */
 WordDictionary.prototype.search = function(word) {
-  let cache = this.cache
-  if (cache[word]) {
-    return true
-  }
   let words = this.words
   let len = word.length
   let data = words[len]
@@ -46,7 +41,6 @@ WordDictionary.prototype.search = function(word) {
   let reg = new RegExp(`^${word.replace(/\./g, '[a-z]')}$`)
   for (let key in data) {
     if (reg.test(key)) {
-      cache[word] = true
       return true
     }
   }
